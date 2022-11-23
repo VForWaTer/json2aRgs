@@ -63,6 +63,7 @@ get_parameters <- function() {
       if (ext == "dat") {
         # matrix files: no header, no index
         val <- as.matrix(read.table(val))
+        dimnames(val) <- NULL
       } else if (ext == "csv") {
         val <- read.csv(val)
       }
