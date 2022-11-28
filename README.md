@@ -7,6 +7,8 @@
 
 [![R-CMD-check](https://github.com/VForWaTer/json2aRgs/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/VForWaTer/json2aRgs/actions/workflows/R-CMD-check.yaml)
 [![codecov](https://codecov.io/github/VForWaTer/json2aRgs/branch/main/graph/badge.svg?token=aHZ4sfqKGj)](https://codecov.io/github/VForWaTer/json2aRgs)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/json2aRgs)](https://CRAN.R-project.org/package=json2aRgs)
 <!-- badges: end -->
 
 ## Parse Parameters Inside a Docker Container (tool)
