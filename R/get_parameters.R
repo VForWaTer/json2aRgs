@@ -71,7 +71,8 @@ get_parameters <- function() {
 
     # check for default value if val is still NULL
     if (is.null(val) && params[["default"]]) {
-      val <- params[["default"]]
+      print(params_config[[name]][["default"]])
+      val <- params_config[[name]][["default"]]
     }
 
     # append value to parsed_params
