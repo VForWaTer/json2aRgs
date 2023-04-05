@@ -68,9 +68,9 @@ get_parameters <- function() {
         val <- read.csv(val)
       }
     }
-
+    print(val)
     # check for default value if val is still NULL
-    if (is.null(val) && params[["default"]]) {
+    if (is.null(val) && params_config[[name]][["default"]]) {
       print(params_config[[name]][["default"]])
       val <- params_config[[name]][["default"]]
     }
