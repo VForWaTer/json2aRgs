@@ -68,6 +68,12 @@ get_parameters <- function() {
         val <- read.csv(val)
       }
     }
+
+    # check for default value if val is still NULL
+    if (is.null(val) && params[["default"]]) {
+      val <- params[["default"]]
+    }
+
     # append value to parsed_params
     parsed_params[[name]] <- val
   }
