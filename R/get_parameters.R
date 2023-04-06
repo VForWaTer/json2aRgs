@@ -76,7 +76,7 @@ get_parameters <- function() {
       }
     }
 
-    # if val is still NULL, a default value exists for this parameter
+    # parse default values for parameters that are still NULL; a default value exists, as the parameter comes from the filtered_config_names
     if (is.null(val)) {
       val <- params_config[[name]]$default
     }
