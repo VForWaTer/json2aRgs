@@ -41,10 +41,20 @@ get_parameters <- function() {
   params_config <- config$tools[[TOOL]]$parameters
 
   # get all names from params_config that have a default value and are not optional to parse default values
-  filtered_config_names <- names(Filter(function(x) !is.null(x$default) && !is.null(x$optional) && x$optional == FALSE, params_config))
-  print(filtered_config_names)
+  filtered_config_names <- sapply(names(params_config), function(name) {
+    x <- params_config[[name]]
+    if (!is.null(x$default) && (!exists("optional", x) || isFALSE(x$optional))) {
+      return(x$default)
+    } else {
+      return(NULL)
+    }
+  })
+
+  # Filter out the NULL values
+  filtered_config_names <- filtered_config_names[!sapply(filtered_config_names, is.null)]
+
   # combine the two lists of parameter names
-  params2parse <- unique(c(params_names, filtered_config_names))
+  params2parse <- unique(c(params_names, names(filtered_config_names)))
 
   # initiate list to save parsed parameters
   parsed_params <- list()
@@ -80,7 +90,7 @@ get_parameters <- function() {
     if (is.null(val)) {
       val <- params_config[[name]]$default
     }
-
+    
     # append value to parsed_params
     parsed_params[[name]] <- val
   }
