@@ -64,8 +64,14 @@ get_parameters <- function() {
     # type of the parameter
     t <- params_config[[name]][["type"]]
 
-    # get the value
-    val <- params[[name]]
+    # get the value from parameters.json
+    if (name %in% names(params)) {
+       val <- params[[name]]
+
+    # if parameter is not included in parameters.json, go for default value in config
+    } else {
+       val <- params_config[[name]]$default
+    }
 
     # handle value specific types
     if (t == "enum") {
@@ -90,7 +96,7 @@ get_parameters <- function() {
     if (is.null(val)) {
       val <- params_config[[name]]$default
     }
-    
+
     # append value to parsed_params
     parsed_params[[name]] <- val
   }
