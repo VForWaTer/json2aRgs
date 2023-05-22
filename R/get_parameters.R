@@ -40,15 +40,38 @@ get_parameters <- function() {
   config <- read_yaml(CONF_FILE)
   params_config <- config$tools[[TOOL]]$parameters
 
+  # get all names from params_config that have a default value and are not optional to parse default values
+  filtered_config_names <- sapply(names(params_config), function(name) {
+    x <- params_config[[name]]
+    if (!is.null(x$default) && (!exists("optional", x) || isFALSE(x$optional))) {
+      return(x$default)
+    } else {
+      return(NULL)
+    }
+  })
+
+  # Filter out the NULL values
+  filtered_config_names <- filtered_config_names[!sapply(filtered_config_names, is.null)]
+
+  # combine the two lists of parameter names
+  params2parse <- unique(c(params_names, names(filtered_config_names)))
+
   # initiate list to save parsed parameters
   parsed_params <- list()
 
   # parse parameters
-  for (name in params_names) {
+  for (name in params2parse) {
     # type of the parameter
     t <- params_config[[name]][["type"]]
-    # get the value
-    val <- params[[name]]
+
+    # get the value from parameters.json
+    if (name %in% names(params)) {
+       val <- params[[name]]
+
+    # if parameter is not included in parameters.json, go for default value in config
+    } else {
+       val <- params_config[[name]]$default
+    }
 
     # handle value specific types
     if (t == "enum") {
@@ -68,6 +91,12 @@ get_parameters <- function() {
         val <- read.csv(val)
       }
     }
+
+    # parse default values for parameters that are still NULL; a default value exists, as the parameter comes from the filtered_config_names
+    if (is.null(val)) {
+      val <- params_config[[name]]$default
+    }
+
     # append value to parsed_params
     parsed_params[[name]] <- val
   }
