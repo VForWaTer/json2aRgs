@@ -90,6 +90,40 @@ get_parameters <- function() {
       } else if (ext == "csv") {
         val <- read.csv(val)
       }
+    } else if (tolower(t) %in% c("integer", "float")) {
+      print(t)
+      # check for min in params_config
+      if ("min" %in% names(params_config[[name]])) {
+        min <- params_config[[name]]$min
+      } else {
+        min <- NULL
+      }
+      # check for max in params_config
+      if ("max" %in% names(params_config[[name]])) {
+        max <- params_config[[name]]$max
+      } else {
+        max <- NULL
+      }
+
+      # check whether val is in min and max range
+      if (!is.null(min) && !is.null(max)) {
+        # check if min is smaller than or equal to max
+        if (max <= min) {
+          stop(sprintf("There is an error in your parameter configuration / tool.yml, as the given minimum value (%s) for parameter '%s' is higher than or equal to the maximum number (%s).", min, name, max))
+        # check if val is between min and max
+        } else if (!(min <= val && val <= max)) {
+          stop(sprintf("%s is %s, but it must be between %s and %s.", name, val, min, max))
+        }
+        # check if val is greater than or equal to min
+        } else if (!is.null(min) && !(min <= val)) {
+          stop(sprintf("%s is %s, but must be higher than or equal to %s.", name, val, min))
+        # check if val is smaller than or equal to max
+        } else if (!is.null(max) && !(val <= max)) {
+          stop(sprintf("%s is %s, but must be smaller than or equal to %s.", name, val, max))
+        # return val if not violating min-max constraints
+        } else {
+          parsed_params[[name]] <- val
+        }
     }
 
     # parse default values for parameters that are still NULL; a default value exists, as the parameter comes from the filtered_config_names
