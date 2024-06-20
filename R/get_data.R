@@ -35,12 +35,11 @@ get_data <- function(return_data_paths = FALSE) {
   # get the tool name
   TOOL <- tolower(Sys.getenv(x = "TOOL_RUN"))
 
-  # parse the json
+  # parse the json, access data section
   data <- jsonlite::read_json(path = PARAM_FILE, simplifyVector = TRUE)[[TOOL]][["data"]]
 
   # parse the config yaml, access data section
-  config <- yaml::read_yaml(CONF_FILE)
-  data_config <- config$tools[[TOOL]]$data
+  data_config <- yaml::read_yaml(CONF_FILE)$tools[[TOOL]]$data
 
   # initialize list for data to return
   data_return <- list()
