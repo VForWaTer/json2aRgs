@@ -21,6 +21,10 @@ tools:
         array: true
       foo_boolean:
         type: boolean
+      foo_default_int:
+        type: integer
+        default: 3
+        optional: false
     data:
       foo_matrix:
         type: file

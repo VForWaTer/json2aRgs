@@ -8,11 +8,12 @@ test_that("parse parameters works", {
   params <- get_parameters()
 
   # test parsed parameters
-  testthat::expect_length(params, 6)
+  testthat::expect_length(params, 7)
   testthat::expect_equal(params$foo_int, 42)
   testthat::expect_type(params$foo_int, "integer")
   testthat::expect_type(params$foo_string, "character")
   testthat::expect_type(params$foo_float, "double")
   testthat::expect_length(params$foo_array, 5)
   testthat::expect_type(params$foo_boolean, "logical")
+  testthat::expect_equal(params$foo_default_int, 3)
 })
