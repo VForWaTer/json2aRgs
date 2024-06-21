@@ -19,6 +19,8 @@ tools:
       foo_array:
         type: float
         array: true
+      foo_boolean:
+        type: boolean
     data:
       foo_matrix:
         type: file
