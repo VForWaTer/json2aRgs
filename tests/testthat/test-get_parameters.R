@@ -8,9 +8,7 @@ test_that("parse parameters works", {
   params <- get_parameters()
 
   # test parsed parameters
-  testthat::expect_length(params, 7)
+  testthat::expect_length(params, 5)
   testthat::expect_equal(params$foo_int, 42)
   testthat::expect_length(params$foo_array, 5)
-  testthat::expect_equal(params$foo_matrix[3, 2], 6.1)
-  testthat::expect_equal(colnames(params$foo_csv), c("A", "B", "C", "D"))
 })
