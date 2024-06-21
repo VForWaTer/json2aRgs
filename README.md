@@ -13,7 +13,7 @@ status](https://www.r-pkg.org/badges/version/json2aRgs)](https://CRAN.R-project.
 
 ## Parse Parameters Inside a Docker Container (tool)
 
-The functions `get_parameters()` and `get_data` are intended to be used 
+The functions `get_parameters()` and `get_data()` are intended to be used 
 within a docker container with a certain file structure to read keyword 
 arguments from the file `/in/input.json` automagically. The file 
 `/src/tool.yaml` contains specifications on these keyword arguments, which 
