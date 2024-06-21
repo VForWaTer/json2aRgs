@@ -2,10 +2,10 @@
 #'
 #' @description
 #'     This package is intended to be used inside a docker container to parse
-#'     parameters from "/in/parameters.json" with the help of
+#'     parameters from "/in/input.json" with the help of
 #'     the parameter configuration in "/src/tool.yml".
 #'
-#' @return A list of the parsed parameters specified in "/in/parameters.json"
+#' @return A list of the parsed parameters specified in "/in/input.json"
 #' @examples
 #' \dontrun{
 #'      params <- get_parameters()
@@ -14,7 +14,6 @@
 #' @importFrom jsonlite read_json
 #' @importFrom yaml read_yaml
 #' @importFrom tools file_ext
-#' @importFrom utils read.csv read.table
 
 get_parameters <- function() {
   # get the input file env variable
