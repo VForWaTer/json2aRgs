@@ -1,11 +1,16 @@
 {
     "foobar": {
-        "foo_int": 42,
-        "foo_float": 13.37,
-        "foo_string": "Never eat yellow snow",
-        "foo_enum": "bar",
-        "foo_array": [34, 55, 23, 43, 23],
-        "foo_matrix": "testdata/in/foo_matrix.dat",
-        "foo_csv": "testdata/in/foo_csv.csv"
+        "parameters": {
+            "foo_int": 42,
+            "foo_float": 13.37,
+            "foo_string": "Never eat yellow snow",
+            "foo_enum": "bar",
+            "foo_array": [34, 55, 23, 43, 23],
+            "foo_boolean": true
+        },
+        "data": {
+            "foo_matrix": "testdata/in/foo_matrix.dat",
+            "foo_csv": "testdata/in/foo_csv.csv"
+        }
     }
 }
