@@ -6,6 +6,10 @@
 \usage{
 get_data(return_data_paths = FALSE)
 }
+\arguments{
+\item{return_data_paths}{Logical. If FALSE (default), the function will return the paths
+to the data files. If TRUE, the function will try to parse the data.}
+}
 \value{
 A list of the parsed data specified in "/in/input.json"
 }
