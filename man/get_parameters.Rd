@@ -7,11 +7,11 @@
 get_parameters()
 }
 \value{
-A list of the parsed parameters specified in "/in/parameters.json"
+A list of the parsed parameters specified in "/in/input.json"
 }
 \description{
 This package is intended to be used inside a docker container to parse
-    parameters from "/in/parameters.json" with the help of
+    parameters from "/in/input.json" with the help of
     the parameter configuration in "/src/tool.yml".
 }
 \examples{
