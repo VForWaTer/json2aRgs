@@ -74,19 +74,19 @@ get_parameters <- function() {
     # handle value specific types
 
     # enumeration
-    if (type == "enum") {
+    if (tolower(type) == "enum") {
       if (!(val %in% params_config[[name]]$values)) {
         stop(paste("The value '", val, "' is not contained in [", paste(params_config[[name]]$values, collapse = " "), "]", sep = ""))
       }
     }
 
     # datetime
-    else if (type %in% c("datetime", "date", "time")) {
+    else if (tolower(type) %in% c("datetime", "date", "time")) {
       val <- as.POSIXct(val)
     }
 
     # boolean
-    else if (type %in% c("boolean", "bool")) {
+    else if (tolower(type) %in% c("boolean", "bool")) {
       if (!isTRUE(val) && !isFALSE(val)) {
         stop(paste("The value '", val, "' is not a boolean value."))
       }
@@ -94,6 +94,7 @@ get_parameters <- function() {
 
     # integer and float
     else if (tolower(type) %in% c("integer", "float")) {
+
       # check for min in params_config
       if ("min" %in% names(params_config[[name]])) {
         min <- params_config[[name]]$min
@@ -133,13 +134,9 @@ get_parameters <- function() {
       }
     }
 
-    # parse default values for parameters that are still NULL; a default value exists, as the parameter comes from the filtered_config_names
-    if (is.null(val)) {
-      val <- params_config[[name]]$default
-    }
-
     # append value to parsed_params
     parsed_params[[name]] <- val
   }
+
   return(parsed_params)
 }
