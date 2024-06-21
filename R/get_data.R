@@ -7,6 +7,8 @@
 #'     The data can be parsed by file extension.
 #'     If return_data_paths is set to FALSE, the function will return the paths
 #'     to the data files. If set to TRUE, the function will try to parse the data.
+#' @param return_data_paths Logical. If FALSE (default), the function will return the paths
+#'     to the data files. If TRUE, the function will try to parse the data.
 #'
 #' @return A list of the parsed data specified in "/in/input.json"
 #' @examples
